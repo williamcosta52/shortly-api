@@ -40,3 +40,11 @@ export async function deleteUrlById(id){
         return err.message;
     }
 }
+export async function updateViewsCount(id){
+    try {
+        const result = await db.query(`UPDATE urls SET clicks = clicks +1 WHERE id=$1`, [id]);
+        return result;
+    } catch (err){
+        return err.message;
+    }
+}

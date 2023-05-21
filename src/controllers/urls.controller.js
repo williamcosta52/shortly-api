@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { verifyByToken, findUrlById, findShortUrl } from "../repositories/urls.repositories.js"
+import { verifyByToken, findUrlById, findShortUrl, updateViewsCount } from "../repositories/urls.repositories.js"
 
 export async function urlShort(req, res) {
     const { authorization } = req.header;
@@ -39,6 +39,7 @@ export async function getShortUrl(req, res){
     try {
         const resultShortUrl = await findShortUrl(shortUrl);
         if (resultShortUrl.rows[0].length === 0) return res.status(404).send({message: "url não encontrada"});
+        await updateViewsCount(shortUrl.rows[0].id);
         res.redirect(resultShortUrl.rows[0].url);
     } catch (err) {
         res.send(err.message);

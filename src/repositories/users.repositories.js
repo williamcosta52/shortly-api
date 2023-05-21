@@ -16,3 +16,19 @@ export async function inserUserDB(name, email, encryptPassword){
         return err.message;
     }
 }
+export async function findUserByToken(token){
+    try {
+        const result = await db.query(`SELECT * FROM users WHERE token=$1`, [token])
+        return result;
+    } catch (err) {
+        return err.message;
+    }
+}
+export async function findUserUrls(userId){
+    try {
+        const result = await db.query(`SELECT SUM(clicks) as totalClicks FROM urls WHERE "userId" = $1`, [userId]);
+        return result;
+    } catch (err) {
+        return err.message;
+    }
+}   
