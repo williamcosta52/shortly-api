@@ -16,3 +16,19 @@ export async function insertUrl(url, shortUrl, user){
         return err.message;
     }
 }
+export async function findUrlById(id){
+    try {
+        const result = await db.query(`SELECT * FROM urls WHERE id=$1`, [id]);
+        return result;
+    } catch (err) {
+        return err.message;
+    }
+}
+export async function findShortUrl(shortUrl){
+    try {
+        const result = await db.query(`SELECT * FROM urls WHERE "shortUrl"=$1`, [shortUrl]);
+        return result;
+    } catch (err) {
+        return err.message;
+    }
+}

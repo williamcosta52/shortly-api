@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { urlShort } from "../controllers/urls.controller.js";
+import { getShortUrl, getUrlById, urlShort } from "../controllers/urls.controller.js";
 import { validateUrl } from "../middlewares/validateSchema.middleware.js";
 import { urlSchema } from "../schemas/url.schema.js";
 
 const urlRouter = Router();
 
 urlRouter.post("/urls/shorten", validateUrl(urlSchema) ,urlShort);
+urlRouter.get("/urls/:id", getUrlById);
+urlRouter.get("/urls/open/:shortUrl", getShortUrl);
+
+export default urlRouter;
