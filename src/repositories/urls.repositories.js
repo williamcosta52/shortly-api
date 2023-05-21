@@ -32,3 +32,11 @@ export async function findShortUrl(shortUrl){
         return err.message;
     }
 }
+export async function deleteUrlById(id){
+    try {
+        const result = await db.query(`DELETE FROM urls WHERE id=$1`, [id]);
+        return result;
+    } catch (err) {
+        return err.message;
+    }
+}

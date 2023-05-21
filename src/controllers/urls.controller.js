@@ -44,3 +44,20 @@ export async function getShortUrl(req, res){
         res.send(err.message);
     }
 }
+export async function deleteUrlById(req, res){
+    const { authorization } = req.header;
+    const token = authorization?.replace('Bearer ', '');
+    const { id } = req.params;
+    if (!token) return res.sendStatus(401);
+    try {
+        const verifyUser = await verifyByToken(token);
+        if (verifyUser.rows[0].length === 0) return res.sendStatus(401);
+        const verifyUrl = await findUrlById(id);
+        if (verifyUser.rows[0].id !== verifyUrl.rows[0].userId) return res.sendStatus(401);
+        if (verifyUrl.rows[0].length === 0) return res.sendStatus(404);
+        const deleteUrl = await deleteUrlById(id);
+        res.status(204).send({message: "url excluida com sucesso!"});
+    } catch (err) {
+        res.send(err.message);
+    }
+}
