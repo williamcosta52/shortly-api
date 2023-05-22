@@ -50,7 +50,7 @@ export async function deleteUrl(id) {
 export async function updateViewsCount(id) {
 	try {
 		const result = await db.query(
-			`UPDATE urls SET 'visitCount' = 'visitCount' + 1 WHERE id=$1`,
+			`UPDATE urls SET visitcount = visitcount + 1 WHERE id=$1`,
 			[id]
 		);
 		return result;
