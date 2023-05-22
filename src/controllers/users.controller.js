@@ -55,7 +55,7 @@ export async function getUserInfos(req, res) {
 			id: u.id,
 			shortUrl: u.shortUrl,
 			url: u.url,
-			visitCount: u.visitcount,
+			visitCount: u.visitCount,
 		}));
 		const userInfo = {
 			id: user.id,
