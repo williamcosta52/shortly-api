@@ -50,7 +50,11 @@ export async function getUserInfos(req, res) {
 		const findUser = await findUserByToken(token);
 		const user = findUser.rows[0];
 		const findUrl = await findUserUrls(user.id);
-		const url = findUrl.rows[0].totalClicks;
+		let url;
+		if (findUrl.rows[0].totalClicks === undefined) {
+			url = 0;
+		}
+		console.log(url);
 		const findShortUrls = await findUrlById(user.id);
 		const shortUrls = findShortUrls.rows.map((u) => ({
 			id: u.id,

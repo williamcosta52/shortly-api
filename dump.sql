@@ -63,7 +63,8 @@ CREATE TABLE public.users (
     name text NOT NULL,
     email text NOT NULL,
     password text NOT NULL,
-    token text
+    token text,
+    createdat timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
