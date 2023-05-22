@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.14
+-- Dumped from database version 12.14 (Ubuntu 12.14-0ubuntu0.20.04.1)
 -- Dumped by pg_dump version 12.14 (Ubuntu 12.14-0ubuntu0.20.04.1)
 
 SET statement_timeout = 0;
@@ -15,20 +15,6 @@ SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
-
---
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
---
-
-CREATE SCHEMA public;
-
-
---
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON SCHEMA public IS 'standard public schema';
-
 
 SET default_tablespace = '';
 
@@ -170,16 +156,6 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_token_key UNIQUE (token);
-
-
---
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: -
---
-
-REVOKE ALL ON SCHEMA public FROM postgres;
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-GRANT ALL ON SCHEMA public TO william;
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
