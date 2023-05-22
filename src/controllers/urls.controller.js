@@ -32,7 +32,7 @@ export async function getUrlById(req, res) {
 			return res.status(404).send({ message: "url não existe" });
 		const urls = findUrls.rows.map((u) => ({
 			id: u.id,
-			shortUrl: u.shorturl,
+			shortUrl: u.shortUrl,
 			url: u.url,
 		}));
 		return res.status(200).send(urls[0]);
@@ -63,7 +63,7 @@ export async function deleteUrlById(req, res) {
 		if (verifyUrl.rows.length === 0) return res.sendStatus(404);
 		const verifyUser = await verifyByToken(token);
 		if (verifyUser.rows.length === 0) return res.sendStatus(401);
-		if (verifyUser.rows[0].id !== verifyUrl.rows[0].userid)
+		if (verifyUser.rows[0].id !== verifyUrl.rows[0].userId)
 			return res.sendStatus(401);
 		await deleteUrl(id);
 		res.status(204).send({ message: "url excluida com sucesso!" });

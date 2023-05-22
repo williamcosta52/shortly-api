@@ -59,9 +59,9 @@ export async function getUserInfos(req, res) {
 		const findShortUrls = await findUrlById(user.id);
 		const shortUrls = findShortUrls.rows.map((u) => ({
 			id: u.id,
-			shortUrl: u.shorturl,
+			shortUrl: u.shortUrl,
 			url: u.url,
-			visitCount: u.clicks,
+			visitCount: u.visitCount,
 		}));
 		const userInfo = {
 			id: user.id,
