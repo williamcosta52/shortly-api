@@ -49,6 +49,7 @@ export async function getUserInfos(req, res) {
 	try {
 		const findUser = await findUserByToken(token);
 		const user = findUser.rows[0];
+		if (findUser.rows.length === 0) return res.sendStatus(401);
 		const findUrl = await findUserUrls(user.id);
 		let url;
 		if (findUrl.rows[0].totalClicks === undefined) {

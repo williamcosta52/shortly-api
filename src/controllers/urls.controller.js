@@ -44,9 +44,9 @@ export async function getShortUrl(req, res) {
 	const { shortUrl } = req.params;
 	try {
 		const resultShortUrl = await findShortUrl(shortUrl);
-		const url = resultShortUrl.rows[0].url;
 		if (resultShortUrl.rows.length === 0)
 			return res.status(404).send({ message: "url não encontrada" });
+		const url = resultShortUrl.rows[0].url;
 		await updateViewsCount(resultShortUrl.rows[0].id);
 		res.redirect(url);
 	} catch (err) {
@@ -59,12 +59,12 @@ export async function deleteUrlById(req, res) {
 	const { id } = req.params;
 	if (!token) return res.sendStatus(401);
 	try {
+		const verifyUrl = await findUrlById(id);
+		if (verifyUrl.rows.length === 0) return res.sendStatus(404);
 		const verifyUser = await verifyByToken(token);
 		if (verifyUser.rows.length === 0) return res.sendStatus(401);
-		const verifyUrl = await findUrlById(id);
 		if (verifyUser.rows[0].id !== verifyUrl.rows[0].userid)
 			return res.sendStatus(401);
-		if (verifyUrl.rows[0].length === 0) return res.sendStatus(404);
 		await deleteUrl(id);
 		res.status(204).send({ message: "url excluida com sucesso!" });
 	} catch (err) {
