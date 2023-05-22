@@ -29,7 +29,8 @@ CREATE TABLE public.urls (
     url text NOT NULL,
     shorturl text NOT NULL,
     userid integer NOT NULL,
-    clicks integer DEFAULT 0
+    clicks integer DEFAULT 0,
+    createdat timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
