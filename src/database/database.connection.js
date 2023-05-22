@@ -5,7 +5,7 @@ dotenv.config();
 const { Pool } = pg;
 
 const configDB = {
-  connectionString: process.env.DATABASE_URL,
+	connectionString: process.env.DATABASE_URL,
 };
 
 if (process.env.MODE === "prod") configDB.ssl = true;
