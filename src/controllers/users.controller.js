@@ -45,17 +45,11 @@ export async function getUserInfos(req, res) {
 	const { authorization } = req.headers;
 	const token = authorization?.replace("Bearer ", "");
 	if (!token) return res.sendStatus(401);
-
 	try {
 		const findUser = await findUserByToken(token);
 		const user = findUser.rows[0];
 		if (findUser.rows.length === 0) return res.sendStatus(401);
 		const findUrl = await findUserUrls(user.id);
-		let url;
-		if (findUrl.rows[0].totalClicks === undefined) {
-			url = 0;
-		}
-		console.log(url);
 		const findShortUrls = await findUrlById(user.id);
 		const shortUrls = findShortUrls.rows.map((u) => ({
 			id: u.id,
@@ -66,7 +60,7 @@ export async function getUserInfos(req, res) {
 		const userInfo = {
 			id: user.id,
 			name: user.name,
-			visitCount: url,
+			visitCount: findUrl.rows[0].visitcount,
 			shortenedUrls: shortUrls,
 		};
 		res.status(200).send(userInfo);

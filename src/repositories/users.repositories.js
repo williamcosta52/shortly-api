@@ -34,7 +34,7 @@ export async function findUserByToken(token) {
 export async function findUserUrls(userId) {
 	try {
 		const result = await db.query(
-			`SELECT SUM(clicks) as totalClicks FROM urls WHERE "userId"= $1`,
+			`SELECT SUM("visitCount") as visitCount FROM urls WHERE "userId"= $1`,
 			[userId]
 		);
 		return result;
