@@ -26,9 +26,17 @@ export async function findUserByToken(token){
 }
 export async function findUserUrls(userId){
     try {
-        const result = await db.query(`SELECT SUM(clicks) as totalClicks FROM urls WHERE "userId" = $1`, [userId]);
+        const result = await db.query(`SELECT SUM(clicks) as totalClicks FROM urls WHERE 'userId'= $1`, [userId]);
         return result;
     } catch (err) {
         return err.message;
     }
 }   
+export async function insertTokenUser(token, email){
+    try {
+        const result = await db.query(`UPDATE users SET token=$1 WHERE email=$2`, [token, email]);
+        return result;
+    } catch (err) {
+        return err.message;
+    }
+}
