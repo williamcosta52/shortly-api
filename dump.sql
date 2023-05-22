@@ -27,10 +27,10 @@ SET default_table_access_method = heap;
 CREATE TABLE public.urls (
     id integer NOT NULL,
     url text NOT NULL,
-    shorturl text NOT NULL,
-    userid integer NOT NULL,
-    clicks integer DEFAULT 0,
-    createdat timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+    "shortUrl" text NOT NULL,
+    "userId" integer NOT NULL,
+    "visitCount" integer DEFAULT 0 NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -64,7 +64,7 @@ CREATE TABLE public.users (
     email text NOT NULL,
     password text NOT NULL,
     token text,
-    createdat timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+    "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 

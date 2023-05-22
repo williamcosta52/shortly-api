@@ -13,7 +13,7 @@ export async function verifyByToken(token) {
 export async function insertUrl(url, shortUrl, user) {
 	try {
 		const result = await db.query(
-			`INSERT INTO urls (url, shortUrl, userId) VALUES ($1, $2, $3)`,
+			`INSERT INTO urls (url, 'shortUrl', 'userId') VALUES ($1, $2, $3)`,
 			[url, shortUrl, user.id]
 		);
 		return result;
@@ -31,7 +31,7 @@ export async function findUrlById(id) {
 }
 export async function findShortUrl(shortUrl) {
 	try {
-		const result = await db.query(`SELECT * FROM urls WHERE shorturl=$1`, [
+		const result = await db.query(`SELECT * FROM urls WHERE 'shortUrl'=$1`, [
 			shortUrl,
 		]);
 		return result;
@@ -50,7 +50,7 @@ export async function deleteUrl(id) {
 export async function updateViewsCount(id) {
 	try {
 		const result = await db.query(
-			`UPDATE urls SET visitcount = visitcount + 1 WHERE id=$1`,
+			`UPDATE urls SET 'visitCount' = 'visitCount' + 1 WHERE id=$1`,
 			[id]
 		);
 		return result;
