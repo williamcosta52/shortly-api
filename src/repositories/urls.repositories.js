@@ -23,7 +23,7 @@ export async function insertUrl(url, shortUrl, user) {
 }
 export async function findUrlById(id) {
 	try {
-		const result = await db.query(`SELECT * FROM urls WHERE id=$1`, [id]);
+		const result = await db.query(`SELECT * FROM urls WHERE "userId"=$1`, [id]);
 		return result;
 	} catch (err) {
 		return err.message;
